@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Services – Marwar Projects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#1c1f26;--mute:#6b7280;--line:#e5e7eb;--acc:#b8864b;--acc-d:#946a37;--dark:#1c1f26;--on-dark:#f4f5f7;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--card:#1e2128;--ink:#f1f2f4;--mute:#9aa1ad;--line:#2b2f38;--dark:#0e0f13}}
+:root[data-theme="dark"]{--bg:#15171c;--card:#1e2128;--ink:#f1f2f4;--mute:#9aa1ad;--line:#2b2f38;--dark:#0e0f13}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.7;overflow-x:hidden}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.2}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1140px;margin:auto;padding:0 22px}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700}
+.logo i{width:34px;height:34px;border-radius:8px;background:var(--dark);color:var(--acc);display:grid;place-items:center;font-style:normal;font-size:1.05rem}
+nav ul{display:flex;gap:30px;list-style:none;padding:0;font-size:.9rem;font-weight:500}
+nav a:hover{color:var(--acc)}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;background:var(--dark);color:var(--on-dark);font-weight:600;font-size:.9rem;border:1px solid var(--dark);transition:.25s}
+.btn:hover{background:var(--acc);border-color:var(--acc);transform:translateY(-2px)}
+#mb{display:none;background:none;border:0;font-size:1.6rem;color:var(--ink)}
+.banner{padding:70px 0 60px;background:radial-gradient(circle at 85% 30%,color-mix(in srgb,var(--acc) 14%,transparent),transparent 45%),var(--bg);border-bottom:1px solid var(--line)}
+.banner h1{font-size:clamp(2rem,4.5vw,3rem);margin:8px 0 10px}
+.crumb{font-size:.85rem;color:var(--mute)}
+.crumb a{color:var(--acc-d);font-weight:500}
+.tag{display:inline-block;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--acc-d);font-weight:600}
+section{padding:80px 0}
+.services{background:var(--card);border-block:1px solid var(--line)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:28px 24px;transition:.3s}
+.card:hover{background:var(--card);transform:translateY(-6px);box-shadow:0 22px 40px -22px rgba(0,0,0,.35);border-color:var(--acc)}
+.ic{width:52px;height:52px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;margin-bottom:18px;color:var(--acc)}
+.card:hover .ic{background:var(--dark)}
+.ic svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.1rem;margin-bottom:8px}
+.card p{font-size:.88rem;color:var(--mute);margin-bottom:14px}
+.card a{font-size:.82rem;font-weight:600;color:var(--acc-d)}
+footer{background:var(--dark);color:#c9ccd3;padding:60px 0 24px}
+footer .cols{display:grid;grid-template-columns:1.4fr 1.4fr 1fr;gap:40px}
+footer h4{font:600 1.1rem 'Playfair Display',serif;color:#fff;margin-bottom:14px}
+footer ul{list-style:none;padding:0;font-size:.88rem;display:grid;gap:8px}
+footer li:before{content:"» ";color:var(--acc)}
+footer p{font-size:.88rem}
+.copy{border-top:1px solid #2e323b;margin-top:40px;padding-top:20px;font-size:.8rem;text-align:center}
+@media(max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}.about .wrap,.contact .box,footer .cols{grid-template-columns:1fr}.visual{max-width:420px}}
+@media(max-width:700px){#mb{display:block}nav ul{display:none;position:absolute;top:70px;left:0;right:0;background:var(--card);flex-direction:column;padding:20px 22px;gap:16px;border-bottom:1px solid var(--line)}nav ul.open{display:flex}.nav>.btn{display:none}.grid{grid-template-columns:1fr}section{padding:60px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a href="index.html" class="logo"><span>MARWAR PROJECTS</span></a>
+<nav><ul id="menu"><li><a href="index.html">Home</a></li><li><a href="about.html" >About</a></li><li><a href="services.html" style="color:var(--acc)">Services</a></li><li><a href="clients.html">Clients</a></li><li><a href="contact.html">Contact</a></li></ul></nav>
+<a class="btn" href="contact.html">Get a Quote</a>
+<button id="mb" aria-label="Menu">☰</button>
+</div></header>
+
+<main>
+<div class="banner"><div class="wrap">
+<span class="tag">What We Provide</span>
+<h1>Services - Marwar Projects</h1>
+<div class="crumb"><a href="index.html">Home</a> &nbsp;/&nbsp; Services</div>
+</div></div>
+
+<section class="services" id="services"><div class="wrap">
+<div class="grid">
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M6 21V9l8-5v17M14 9h4l2 4v8M4 13h4"/></svg></div><h3>Construction Equipment Rental</h3><p>Reliable, well-maintained construction equipment on rent, excellent in quality and performance.</p><a href="construction_equipment_rental.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 16V7h12v9M14 10h4l4 4v2h-8"/><circle cx="7" cy="17" r="2"/><circle cx="18" cy="17" r="2"/></svg></div><h3>Transportation Vehicle Rental</h3><p>Hydraulic cranes, trailers and trucks provided on rent according to your need.</p><a href="transportation_equipemnt_rental.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6"/></svg></div><h3>Civil Construction</h3><p>All kinds of civil construction by a highly experienced professional team across sectors.</p><a href="civil_constructions.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 20V8M21 20V8M3 12h18M3 17h18M3 8l9-5 9 5"/></svg></div><h3>Bunk Labour Accommodation</h3><p>Bunkhouse accommodation for up to 1000 labourers in a short time.</p><a href="bunk_labour_accommodation.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.7-6 6-6s6 2.5 6 6M16 5a3 3 0 010 6M18 14c2 .7 3 2.6 3 5"/></svg></div><h3>Manpower Services</h3><p>Highly trustable manpower, matching job seekers to the best roles by education and skill.</p><a href="manpower_services.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 5 6 5 9a5 5 0 01-10 0c0-3 2-5 5-9zM9 21h6"/></svg></div><h3>Oil &amp; Gas EPC Contractor</h3><p>World-class Oil and Gas EPC contracting at reasonable service cost.</p><a href="oil_and_gas_epc.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></div><h3>Mechanical &amp; Fabrication Work</h3><p>Precision mechanical and fabrication work built to industrial standards.</p><a href="mechanical_and_fabrication.html">Read More →</a></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 20h18M6 16V9M12 16V5M18 16v-5"/></svg></div><h3>Consultancy Services</h3><p>Expert consultancy that helps clients grow their business in the market.</p><a href="consultancy_services.html">Read More →</a></div>
+</div><p style="text-align:center;margin-top:40px"></p></div></section>
+
+
+<footer><div class="wrap">
+<div class="cols">
+<div><h4>Our Services</h4><ul><li>Construction Equipment Rental</li><li>Transportation Vehicle Rental</li><li>Civil Construction</li><li>Bunk Labour Accommodation</li></ul></div>
+<div><h4>&nbsp;</h4><ul><li>Manpower Services</li><li>Oil &amp; Gas EPC Contractor</li><li>Mechanical &amp; Fabrication Work</li><li>Consultancy</li></ul></div>
+<div><h4>Address</h4><p>Marwar Projects<br>Tansingh Circle, Sardarpura <br>Barmer – 344001, Rajasthan</p></div>
+</div>
+<div class="copy">© 2026 Marwar Projects. All Rights Reserved.</div>
+</div></footer>
+
+<script>
+document.getElementById('mb').onclick=function(){document.getElementById('menu').classList.toggle('open')};
+document.querySelectorAll('#menu a').forEach(function(a){a.onclick=function(){document.getElementById('menu').classList.remove('open')}});
+</script>
+</body>
+</html>
