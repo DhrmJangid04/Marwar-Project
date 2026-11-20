@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin – Marwar Projects</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--ink:#1c1f26;--mute:#6b7280;--line:#e5e7eb;--acc:#b8864b;--acc-d:#946a37;--red:#b4443c}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.55}
+.top{background:var(--card);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.top b{font-family:Georgia,serif;font-size:1.2rem}.top b span{color:var(--acc)}
+.wrap{max-width:1180px;margin:auto;padding:26px 22px}
+.btn{display:inline-block;padding:10px 20px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:#fff;font-weight:600;font-size:.85rem;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--acc);border-color:var(--acc)}
+.btn.o{background:var(--card);color:var(--ink)}.btn.o:hover{color:#fff}
+.btn.r{background:var(--card);color:var(--red);border-color:var(--red)}.btn.r:hover{background:var(--red);color:#fff}
+.btn.sm{padding:6px 14px;font-size:.78rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+.login{max-width:420px;margin:70px auto}
+.login h1{font-family:Georgia,serif;font-size:1.6rem;margin-bottom:4px}
+.login p{color:var(--mute);font-size:.9rem;margin-bottom:18px}
+label{display:block;font-size:.82rem;font-weight:600;margin:12px 0 5px}
+input[type=text],input[type=password],input[type=search]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+input:focus{outline:2px solid color-mix(in srgb,var(--acc) 40%,transparent);border-color:var(--acc)}
+.full{width:100%;margin-top:18px;padding:13px}
+.msg{padding:12px 16px;border-radius:12px;margin-bottom:18px;font-size:.9rem}
+.msg.ok{background:#eaf5ee;color:#25613a;border:1px solid #c9e6d3}
+.msg.err{background:#fbeceb;color:var(--red);border:1px solid #f1c9c6}
+.demo{background:#fff7e8;border:1px solid #f0dcb4;color:#7a5a17;border-radius:12px;padding:10px 16px;font-size:.82rem;margin-bottom:18px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 24px;min-width:150px}
+.stat b{display:block;font:700 1.8rem Georgia,serif;color:var(--acc)}.stat span{font-size:.8rem;color:var(--mute)}
+.bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.bar input{max-width:300px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:860px}
+th{background:var(--bg);text-align:left;padding:12px 14px;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#fafafb}
+td.rq{max-width:320px}
+details summary{cursor:pointer;color:var(--acc-d);font-weight:600}
+details p{margin-top:6px;white-space:pre-wrap}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+.panel{margin-top:22px}
+.panel summary{cursor:pointer;font-weight:600;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:14px}
+.panel .in{padding:8px 4px 4px;max-width:420px}
+.small{font-size:.8rem;color:var(--mute);margin-top:8px}
+.hide{display:none}
+a{color:var(--acc-d)}
+</style></head><body>
+
+<div id="auth" class="login card hide">
+  <h1>Marwar Projects</h1>
+  <div id="amsg"></div>
+  <div id="setup" class="hide">
+    <p>First time setup: create your Admin ID and password.</p>
+    <label>Admin ID</label><input type="text" id="s_u" autocomplete="off">
+    <label>Password (min 8 characters)</label><input type="password" id="s_p">
+    <label>Confirm Password</label><input type="password" id="s_p2">
+    <button class="btn full" id="s_go">Create Admin</button>
+  </div>
+  <div id="login" class="hide">
+    <p>Admin login</p>
+    <label>Admin ID</label><input type="text" id="l_u">
+    <label>Password</label><input type="password" id="l_p">
+    <button class="btn full" id="l_go">Login</button>
+  </div>
+  <p class="small" style="margin-top:16px">Demo mode: data is saved in this browser only.</p>
+</div>
+
+<div id="app" class="hide">
+  <div class="top">
+    <b>Marwar <span>Projects</span> · Admin</b>
+    <div class="tools"><span id="who" style="color:var(--mute);font-size:.85rem"></span><button class="btn o sm" id="logout">Logout</button></div>
+  </div>
+  <div class="wrap">
+    <div id="fmsg"></div>
+    <div class="stats">
+      <div class="stat"><b id="n_total">0</b><span>Total Quotes</span></div>
+      <div class="stat"><b id="n_today">0</b><span>Today</span></div>
+    </div>
+    <div class="bar">
+      <input type="search" id="q" placeholder="Search name, email, phone, service…">
+      <div class="tools">
+        <button class="btn o sm" id="csv">Download CSV</button>
+        <button class="btn r sm" id="delall">Reset: Delete All Quotes</button>
+      </div>
+    </div>
+    <div class="tw"><div id="empty" class="empty hide">No quotes yet. New requests will appear here.</div>
+      <table id="t"><thead><tr><th>ID</th><th>Date</th><th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Service</th><th>Requirement</th><th></th></tr></thead><tbody id="tb"></tbody></table>
+    </div>
+
+    <details class="panel"><summary>Change Password</summary><div class="in">
+      <label>Current Password</label><input type="password" id="c_cur">
+      <label>New Password (min 8)</label><input type="password" id="c_new">
+      <label>Confirm New Password</label><input type="password" id="c_new2">
+      <button class="btn sm" style="margin-top:14px" id="c_go">Update Password</button>
+    </div></details>
+
+    <details class="panel"><summary>Reset Admin Login (set a new Admin ID &amp; password)</summary><div class="in">
+      <label>Enter current password to confirm</label><input type="password" id="r_cur">
+      <button class="btn r sm" style="margin-top:14px" id="r_go">Reset Admin Login</button>
+      <p class="small">Your quotes are not deleted. You will be asked to create a new Admin ID and password.</p>
+    </div></details>
+  </div>
+</div>
+
+<script>
+var $=function(i){return document.getElementById(i)};
+var KQ='mp_quotes',KA='mp_admin';
+function getQ(){try{return JSON.parse(localStorage.getItem(KQ)||'[]')}catch(e){return[]}}
+function setQ(a){localStorage.setItem(KQ,JSON.stringify(a))}
+function getA(){try{return JSON.parse(localStorage.getItem(KA)||'null')}catch(e){return null}}
+function hash(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode('mp-demo:'+s)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')})}
+function msg(id,type,t){var el=$(id);el.innerHTML='';if(!t)return;var d=document.createElement('div');d.className='msg '+type;d.textContent=t;el.appendChild(d)}
+var fails=0,lockUntil=0;
+
+function route(){
+  var a=getA(),logged=sessionStorage.getItem('mp_logged');
+  $('auth').classList.add('hide');$('app').classList.add('hide');$('setup').classList.add('hide');$('login').classList.add('hide');
+  if(!a){$('auth').classList.remove('hide');$('setup').classList.remove('hide');return}
+  if(!logged){$('auth').classList.remove('hide');$('login').classList.remove('hide');return}
+  $('app').classList.remove('hide');$('who').textContent='Logged in as '+logged;render();
+}
+
+function render(){
+  var list=getQ().slice().sort(function(a,b){return b.id-a.id});
+  var today=new Date().toDateString();
+  $('n_total').textContent=list.length;
+  $('n_today').textContent=list.filter(function(r){return new Date(r.created_at).toDateString()===today}).length;
+  var tb=$('tb');tb.innerHTML='';
+  $('empty').classList.toggle('hide',list.length>0);$('t').classList.toggle('hide',list.length===0);
+  list.forEach(function(r){
+    var tr=document.createElement('tr');
+    function td(t){var c=document.createElement('td');c.textContent=t;tr.appendChild(c);return c}
+    td('#'+r.id);
+    td(new Date(r.created_at).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}));
+    td(r.name);
+    var ce=td('');var ae=document.createElement('a');ae.href='mailto:'+r.email;ae.textContent=r.email;ce.appendChild(ae);
+    var cp=td('');var ap=document.createElement('a');ap.href='tel:'+r.phone;ap.textContent=r.phone;cp.appendChild(ap);
+    td(r.company||'');td(r.service||'');
+    var cr=td('');cr.className='rq';
+    var dt=document.createElement('details'),sm=document.createElement('summary'),p=document.createElement('p');
+    sm.textContent=r.requirement.length>50?r.requirement.slice(0,50)+'…':r.requirement;p.textContent=r.requirement;
+    dt.appendChild(sm);dt.appendChild(p);cr.appendChild(dt);
+    var cd=td('');var b=document.createElement('button');b.className='btn r sm';b.textContent='Delete';
+    b.onclick=function(){if(confirm('Delete this quote?')){setQ(getQ().filter(function(x){return x.id!==r.id}));msg('fmsg','ok','Quote deleted.');render()}};
+    cd.appendChild(b);tb.appendChild(tr);
+  });
+  applyFilter();
+}
+function applyFilter(){var v=$('q').value.toLowerCase();document.querySelectorAll('#tb tr').forEach(function(r){r.style.display=r.textContent.toLowerCase().indexOf(v)>-1?'':'none'})}
+$('q').addEventListener('input',applyFilter);
+
+$('s_go').onclick=function(){
+  var u=$('s_u').value.trim(),p=$('s_p').value,p2=$('s_p2').value;
+  if(u.length<3)return msg('amsg','err','Admin ID must be at least 3 characters.');
+  if(p.length<8)return msg('amsg','err','Password must be at least 8 characters.');
+  if(p!==p2)return msg('amsg','err','Passwords do not match.');
+  hash(p).then(function(h){localStorage.setItem(KA,JSON.stringify({u:u,h:h}));sessionStorage.setItem('mp_logged',u);msg('amsg','','');route()});
+};
+$('l_go').onclick=function(){
+  if(Date.now()<lockUntil)return msg('amsg','err','Too many attempts. Try again in a minute.');
+  var a=getA(),u=$('l_u').value.trim();
+  hash($('l_p').value).then(function(h){
+    if(a&&a.u===u&&a.h===h){fails=0;sessionStorage.setItem('mp_logged',u);msg('amsg','','');$('l_p').value='';route()}
+    else{fails++;if(fails>=5){lockUntil=Date.now()+60000;fails=0}msg('amsg','err','Wrong Admin ID or password.')}
+  });
+};
+$('l_p').addEventListener('keydown',function(e){if(e.key==='Enter')$('l_go').click()});
+$('logout').onclick=function(){sessionStorage.removeItem('mp_logged');route()};
+$('delall').onclick=function(){if(confirm('Delete ALL quotes permanently? This cannot be undone.')){setQ([]);localStorage.setItem('mp_next_id','1');msg('fmsg','ok','All quotes deleted.');render()}};
+$('csv').onclick=function(){
+  var rows=[['ID','Date','Name','Email','Phone','Company','Service','Requirement']].concat(getQ().map(function(r){return[r.id,r.created_at,r.name,r.email,r.phone,r.company,r.service,r.requirement]}));
+  var csv='\uFEFF'+rows.map(function(r){return r.map(function(c){return '"'+String(c==null?'':c).replace(/"/g,'""')+'"'}).join(',')}).join('\r\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='quotes.csv';a.click();
+};
+$('c_go').onclick=function(){
+  var a=getA(),n=$('c_new').value;
+  hash($('c_cur').value).then(function(h){
+    if(h!==a.h)return msg('fmsg','err','Current password is wrong.');
+    if(n.length<8)return msg('fmsg','err','New password must be at least 8 characters.');
+    if(n!==$('c_new2').value)return msg('fmsg','err','New passwords do not match.');
+    hash(n).then(function(nh){a.h=nh;localStorage.setItem(KA,JSON.stringify(a));['c_cur','c_new','c_new2'].forEach(function(i){$(i).value=''});msg('fmsg','ok','Password changed.')});
+  });
+};
+$('r_go').onclick=function(){
+  var a=getA();
+  hash($('r_cur').value).then(function(h){
+    if(h!==a.h)return msg('fmsg','err','Password is wrong. Login was not reset.');
+    if(!confirm('This removes the current Admin ID and password. Quotes are kept. Continue?'))return;
+    localStorage.removeItem(KA);sessionStorage.removeItem('mp_logged');$('r_cur').value='';route();msg('amsg','ok','Admin login reset. Create a new Admin ID and password.');
+  });
+};
+route();
+</script>
+</body></html>
